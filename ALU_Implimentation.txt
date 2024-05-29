@@ -1,0 +1,41 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx primitives in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity alu_design is
+    Port ( a : in  STD_LOGIC_VECTOR (3 downto 0);
+           b : in  STD_LOGIC_VECTOR (3 downto 0);
+           s : in  STD_LOGIC_VECTOR (2 downto 0);
+           z : out  STD_LOGIC_VECTOR (3 downto 0));
+end alu_design;
+
+architecture Behavioral of alu_design is
+
+begin
+Process(a,b,s)
+begin
+case s is
+when "000" =>z<=a+b;
+when "001" =>z<=a-b;
+when "010" =>z<=a+1;
+when "011" =>z<=a-1;
+when "100" =>z<=a and b;
+when "101" =>z<=a or b;
+when "110" =>z<=a nand b;
+when "111" =>z<=a nor b;
+when others => null;
+end case;
+end Process;
+
+end Behavioral;
+

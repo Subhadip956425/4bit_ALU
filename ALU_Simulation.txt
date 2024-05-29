@@ -1,0 +1,76 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+ 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--USE ieee.numeric_std.ALL;
+ 
+ENTITY alu_sim IS
+END alu_sim;
+ 
+ARCHITECTURE behavior OF alu_sim IS 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+ 
+    COMPONENT alu_design
+    PORT(
+         a : IN  std_logic_vector(3 downto 0);
+         b : IN  std_logic_vector(3 downto 0);
+         s : IN  std_logic_vector(2 downto 0);
+         z : OUT  std_logic_vector(3 downto 0)
+        );
+    END COMPONENT;
+    
+
+   --Inputs
+   signal a : std_logic_vector(3 downto 0) := (others => '0');
+   signal b : std_logic_vector(3 downto 0) := (others => '0');
+   signal s : std_logic_vector(2 downto 0) := (others => '0');
+
+ 	--Outputs
+   signal z : std_logic_vector(3 downto 0);
+   -- No clocks detected in port list. Replace <clock> below with 
+   -- appropriate port name 
+ 
+   --constant <clock>_period : time := 10 ns;
+ 
+BEGIN
+ 
+	-- Instantiate the Unit Under Test (UUT)
+   uut: alu_design PORT MAP (
+          a => a,
+          b => b,
+          s => s,
+          z => z
+        );
+
+--   -- Clock process definitions
+--   <clock>_process :process
+--   begin
+--		<clock> <= '0';
+--		wait for <clock>_period/2;
+--		<clock> <= '1';
+--		wait for <clock>_period/2;
+--   end process;
+ 
+
+   -- Stimulus process
+   stim_proc: process
+   begin		
+      -- hold reset state for 100 ns.
+      
+		a<= "1001";
+		b<= "0101";
+		s<= "000";
+      --wait for <clock>_period*10;
+		wait for 100 ns;	
+		s<= "001";
+
+      -- insert stimulus here 
+
+      wait;
+   end process;
+
+END;
